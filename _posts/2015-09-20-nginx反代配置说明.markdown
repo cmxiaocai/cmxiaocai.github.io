@@ -24,6 +24,7 @@ comments: true
 **结尾带/**
 
 >访问 www.hiapk.dev/templets/v1/def.css 时指向 http://hit.stat.hiapk.com/def.css 文件
+
 ~~~ nginx
         location ^~ /templets/ {
                 proxy_pass http://hit.stat.hiapk.com/;
@@ -32,28 +33,29 @@ comments: true
 
 
 >实例: 将站点templets反代至外网域名
-``` nginx
+
+~~~ nginx
         location ^~ /templets/ {
                 proxy_pass http://hit.stat.hiapk.com;
         }
-
-```
+~~~
 
 >实例: 如果本地uploads文件不存在则使用线上地址
-``` nginx
+
+~~~ nginx
 		location ^~ /uploads/ {
                 root /data/wwwroot;
                 if ( !-e $request_filename){
                         proxy_pass http://p5.image.hiapk.com;
                 }
         }
-```
+~~~
 
 ### 根据域名转发
 >根据域名自动转发到相应服务器的特定端口
 >/usr/local/nginx/conf/vhost/reverse-proxy.conf
 
-```
+~~~
 server {
     listen       80;
     server_name  news.hiapk.dev;
@@ -83,12 +85,11 @@ server {
     access_log /data/log/hiapk-cms.access.log;
     error_log /data/log/hiapk-cms.error.log;
 }
-```
+~~~
 
 >负载均衡
 
-```
-
+~~~
 upstream monitor_server_news {
     server 172.17.163.59:8202;
     server 172.17.163.59:8203;
@@ -108,5 +109,4 @@ server {
     access_log /data/log/hiapk-news.access.log;
     error_log /data/log/hiapk-news.error.log;
 }
-
-```
+~~~
