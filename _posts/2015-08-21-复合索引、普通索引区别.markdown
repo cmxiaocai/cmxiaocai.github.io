@@ -12,20 +12,20 @@ comments: true
 
 #### 使用explain分析sql语句
 
-```
+~~~
  explain SELECT aid,body FROM `dede_addonarticle` WHERE aid IN(0,262,269,281,299,307,312,313,320,401);
-```
+~~~
 #### 通过「SHOW FULL PROCESSLIST」语句很容易就能查到问题SQL
 
-```
+~~~
 	SHOW FULL PROCESSLIST
-```
+~~~
 
 #### 复合索引、普通索引区别
 
 对于复合索引:Mysql从左到右的使用索引中的字段，一个查询可以只使用索引中的一部份，但只能是最左侧部分。例如索引是key index (a,b,c). 可以支持a | a,b| a,b,c 3种组合进行查找，但不支持 b,c进行查找 .当最左侧字段是常量引用时，索引就十分有效。下面用几个例子对比查询条件的不同对性能影响.
 
-```
+~~~
 create table test(
 	a int,
 	b int,
@@ -62,4 +62,4 @@ create table test(
 原因：主要在修改数据时，第个索引都要进行更新，降低写速度。
 2.最窄的字段放在键的左边
 3.避免file sort排序，临时表和表扫描.
-```
+~~~

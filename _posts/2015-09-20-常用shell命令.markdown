@@ -10,26 +10,31 @@ comments: true
 ---
 
 请求总数
-``` bash
+
+~~~bash
 grep 'zb/bd2015/' news.hiapk.com-aceess.log | wc -l
-```
+~~~
 
 每小时请求次数
-``` bash
+
+~~~bash
 grep 'dededynamicapi_v2.php' manager.hiapk.com-aceess.log | grep '08/Sep/2015:[0-9][0-9]:.*' | awk '{print $4}' | awk -F":" '{print $2"H"}' | uniq -c 
-```
+~~~
 
 查找每分钟最大请求数据
-``` bash
+
+~~~bash
 grep 'dededynamicapi_v2.php' manager.hiapk.com-aceess.log | grep '08/Sep/2015:[0-9][0-9]:.*' | awk '{print $4}' | awk -F":" '{print $2":"$3}' | uniq -c | sort -nr | head -n 10
-```
+~~~
 
 curl发送post请求
-``` bash
+
+~~~bash
 curl --data-ascii '{"touser": "@all","toparty": "","totag": " ","msgtype": "text","agentid": "1","text": {"content": "这是内容~"},"safe":"0"}' https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=ACCESS_TOKEN
-```
+~~~
 
 杀死僵尸进程
-``` bash
+
+~~~bash
 ps -A -o stat,ppid,pid,cmd | grep php | grep 'Sl' | awk '{print $3}' | xargs kill -9
-```
+~~~

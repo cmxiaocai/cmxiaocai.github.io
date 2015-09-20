@@ -18,7 +18,7 @@ comments: true
 
 **调用方式：**
 
-```html
+~~~html
 {dede:albumimages aid=1441759}
    <!-- 这里的内容会循环输出,循环次数根据图片数量决定 -->
    图片名称:	[field:name/]  <br>
@@ -31,11 +31,11 @@ comments: true
    图片域名: [field:_imagehost/]  <br>
    <hr>
 {/dede:albumimages}
-```
+~~~
 
 **php：**
 
-```php
+~~~php
 function lib_albumimages(&$p_tag, &$p_obj){
     global $dsql;
 
@@ -90,13 +90,13 @@ function lib_albumimages(&$p_tag, &$p_obj){
 
     return $ret;
 }
-```
+~~~
 
 --------
 
 **调用方式：**
 
-```html
+~~~html
 
 {dede:albuminfo aid=1441759}
 标题:[field:title/]  <br>
@@ -110,11 +110,11 @@ function lib_albumimages(&$p_tag, &$p_obj){
 图集摘要:[field:description/] <br>
 {/dede:albuminfo}
 
-```
+~~~
 
 **php：**
 
-```php
+~~~php
 function lib_albuminfo(&$p_tag, &$p_obj){
     global $dsql;
 
@@ -148,4 +148,4 @@ function lib_albuminfo(&$p_tag, &$p_obj){
     return $ret;
 }
 
-```
+~~~

@@ -14,73 +14,73 @@ comments: true
 > vda 系统损坏时会丢失
 > vdb 数据不会丢失，所以要挂载vdb
 
-``` bash
+~~~ bash
     mkdir /data
 	mount /dev/vdb1 /data
-```
+~~~
 
 > vim /etc/fstab 文件底部追加以下目录
 
-```bash
+~~~bash
 	/dev/vdb1                /data                  ext4    defaults        0 0
-```
+~~~
 
 
 ### 2.将yum源更改为163源
 > 因为centos自带的源速度太慢了,改为163源可以提高yum的速度
 
-``` bash
+~~~bash
 	cd /etc/yum.repos.d/
 	wget http://mirrors.163.com/.help/CentOS6-Base-163.repo
 	mv CentOS-Base.repo CentOS-Base.repo.bak
 	mv CentOS6-Base-163.repo CentOS-Base.repo
 	yum clean all
 	yum update
-```
+~~~
 
 > 升级内核并重启系统( 如果不使用docker请忽略该步骤 )
 
-``` bash
+~~~bash
 	yum install kernel-2.6.32-504.16.2.el6
 	reboot
-```
+~~~
 
 > 接着安装一些基础编译环境
 
-``` bash
+~~~bash
 	yum install -y tar wget gcc gcc-c++ libxml2-devel zlib-devel bzip2-devel 
 	yum install -y curl-devel libjpeg-devel libpng-devel libtiff-devel libxslt-devel
 	yum install -y freetype-devel openssl openssl-devel vim subversion pcre-devel
-```
+~~~
 
 ### 3.创建worker用户
 > 建议大家不要用root直接安装服务的习惯,之后的nginx等服务切换到worker安装
 
-``` bash
+~~~bash
 	adduser worker
 	passwd worker
-```
+~~~
 
 ### 4.安装samba服务
 > 确保关闭setlinux
 
-``` bash
+~~~bash
 	setenforce 0
 	getenforce
 	sed -i '/^SELINUX=/c\SELINUX=disabled' /etc/selinux/config
-```
+~~~
 
 > 安装samba
 
-``` bash
+~~~bash
 	yum install samba samba-client
-```
+~~~
 
 
 > 在smb.conf文件默认加入以下配置
 > vim /etc/samba/smb.conf
 
-``` bash
+~~~bash
 	[data]
 	comment = XiaoCai的KVM开发环境
 	path = /data/wwwroot
@@ -88,14 +88,14 @@ comments: true
 	writable = yes
 	printable = no
 	write list = +staff
-```
+~~~
 
 > 设置smb用户账户密码 ( 密码请和linux系统保持一致 )
 
 
-``` bash
+~~~bash
 	smbpasswd -a worker
-```
+~~~
 
 > 启动samba
 > 记得关闭防火墙,或放开端口( service iptables stop )
@@ -130,9 +130,9 @@ comments: true
 
 命令格式: docker run -i -t -v {代码目录}:/data/www -p {宿主机访问端口}:80 {镜像名称}
 
-``` bash
+~~~ bash
 	docker run -i -t -v /data/wwwroot/www.hiapk.com/:/data/www -p 8082:80 --privileged  hiapk-php53
-```
+~~~
 
 > 4.完成！访问项目
 http://172.17.163.80:8082/dede/

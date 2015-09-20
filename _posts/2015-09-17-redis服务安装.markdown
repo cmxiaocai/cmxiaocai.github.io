@@ -12,18 +12,18 @@ comments: true
 > 下载编译
 > http://redis.io/download 
 
-```
+~~~bash
 mkdir /data/install
 cd /data/install
 wget http://redis.googlecode.com/files/redis-2.6.13.tar.gz
 tar -xvzf redis-2.6.13.tar.gz
 cd redis-stable
 make
-```
+~~~
 
 > 建立redis目录
 
-```
+~~~bash
 cp src/redis-server /usr/local/bin/
 cp src/redis-cli /usr/local/bin/
 
@@ -32,22 +32,22 @@ mkdir -p /usr/local/redis/run
 mkdir -p /data/redis_data
 
 cp redis.conf /usr/local/redis/conf/
-```
+~~~
 
 > 配置redis.conf
 
-```
+~~~bash
 daemonize yes
 
 pidfile /usr/local/redis/run/redis.pid
 
 dir /data/redis_data
 
-```
+~~~
 
 > 创建脚本
 
-```
+~~~bash
 echo '
 #!/bin/bash
 if [ "$1" = "start" ];
@@ -68,25 +68,25 @@ fi
 
 chmod a+x /etc/init.d/redis
 
-```
+~~~
 
 > 启动redis服务
 
-```
+~~~bash
 
 /etc/init.d/redis start
 
 netstat -nlpt | grep 6379
 
-```
+~~~
 
 > 测试
 
-```
+~~~bash
 [root@df768d2c5a6c redis-stable]# redis-cli 
 127.0.0.1:6379> set key1 1111
 OK
 127.0.0.1:6379> get key1
 "1111"
 127.0.0.1:6379> 
-```
+~~~

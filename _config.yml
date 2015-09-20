@@ -8,24 +8,28 @@ url: "http://www.xiaocai.name" # the base hostname & protocol for your site
 favicon: /favicon.png
 
 #feed
-feedburner_username: maangalabs
+feedburner_username: 
 #twitter
-twitter_username: pranavrajs
-github_username:  pranavrajs
+twitter_username: 
+github_username:  cmxiaocai
 
 #linkedin
-linkedin_username: pranavrajs
+linkedin_username: cmxiaocai
 
 #google analytics
-google_analytics_id : UA-53386152-2
+google_analytics_id : 
 #gplus
-gplus_username: 101893920934936418705
+gplus_username: 
 
 #fb_username
 fb_username: pranav.tayberrycreative
 
 #permalink /blog/2014/11/11/this-is-a-sample-post
+<<<<<<< HEAD
 permalink: /blog/:year:month:day/:title
+=======
+permalink: /blog/:year-:month-:day/:title
+>>>>>>> 309d70c93088dee9068e511d816740681b6d81b9
 # Build settings
 markdown: kramdown
 
@@ -35,8 +39,8 @@ disqus_show_comment_count: true
 
 #Can be used for multiple author blogs ! Add name to post For more visit the sample
 authors:
-  pranavrajs:
-    display_name: Pranav Raj S
+  cmxiaocai:
+    display_name: xiaocai
     email: cmxiaocai@gmail.com
     fb: 
     linkedin: 
