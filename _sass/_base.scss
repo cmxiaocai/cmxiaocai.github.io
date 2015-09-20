@@ -117,6 +117,10 @@ code, kbd, pre, samp {
   font-size: 1em;
 }
 
+code {
+  display: block;
+}
+
 button, input, optgroup, select, textarea {
   color: inherit;
   font: inherit;

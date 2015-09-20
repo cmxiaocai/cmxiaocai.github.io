@@ -25,7 +25,7 @@ gplus_username: 101893920934936418705
 fb_username: pranav.tayberrycreative
 
 #permalink /blog/2014/11/11/this-is-a-sample-post
-permalink: /blog/:year-:month-:day-:title
+permalink: /blog/:year:month:day/:title
 # Build settings
 markdown: kramdown
 
