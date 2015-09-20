@@ -1,0 +1,161 @@
+---
+layout: post
+title:  "部门项目结合docker进行日常开发"
+date:   2015-08-21 10:00:00
+categories: docker
+author: xiaocai
+github_repo_username: cmxiaocai
+github_repo : cmxiaocai
+comments: true
+---
+
+### 快速部署项目
+
+> **第一步**: 修改/etc/sysconfig/docker文件,为了镜像仓库授权访问
+> vim /etc/sysconfig/docker
+
+```
+other_args="-g=/data/docker --insecure-registry=172.17.163.105:8500"
+```
+
+> **第二步**: 拉取项目镜像
+
+```
+	docker pull 172.17.163.105:8500/hiapk/dedecms_hiapk_com
+```
+
+> **第三步**: SVN检出项目代码
+
+```
+	mkdir /data/wwwroot/dedecms_hiapk_com
+	cd /data/wwwroot/dedecms_hiapk_com
+	svn checkout svn://10.79.156.**/**/dedecms_hiapk_com
+```
+
+> **第四步**: 启动docker容器运行项目
+
+```
+	docker run -i -t -v /data/www/dedecms_hiapk_com/:/data/www -p 8011:80 --name dedecms_hiapk_com 172.17.163.105:8500/hiapk/dedecms_hiapk_com /data/start.sh
+```
+
+> **第五步**: 访问项目
+
+```
+	http://{你的IP}:8081/dede/
+```
+
+### docker镜像仓库
+	
+> 查看仓库中的镜像
+> **docker search 172.17.163.105:8500/hiapk**
+
+```
+	#基础镜像
+	docker search 172.17.163.105:8500/library	
+
+	NAME              DESCRIPTION   STARS     OFFICIAL   AUTOMATED
+	library/test                    0                    
+	library/centos6                 0  
+
+	#hiapk站点镜像
+	docker search 172.17.163.105:8500/hiapk
+
+	NAME                      DESCRIPTION   STARS     OFFICIAL   AUTOMATED
+	hiapk/centos_base                       0                    
+	hiapk/base_php53                        0                                      
+	hiapk/dedecms_hiapk_com                 0  
+```
+
+### 镜像文件说明
+
+> **172.17.163.105:8500/library/centos6**
+> 官方centos6基础镜像,什么都没装的原始centos系统
+
+--------
+
+> **172.17.163.105:8500/hiapk/centos_base**
+> 在centos6镜像基础上增加了基础编译环境和常用命令工具,并修改了yum源
+> tar wget gcc gcc-c++ libxml2-devel zlib-devel bzip2-devel curl-devel libjpeg-devel libpng-devel libtiff-devel libxslt-devel freetype-devel openssl openssl-devel vim subversion pcre-devel
+
+--------
+
+> **172.17.163.105:8500/hiapk/base_php53**
+> 基础的php 5.3.10开发环境
+-- nginx 1.0.5
+-- php 5.3.10
+-- php yaf2.3.3
+-- php redis2.2.7
+-- php mongo1.6.7
+-- php memcache
+
+--------
+
+> **172.17.163.105:8500/hiapk/dedecms_hiapk_com**
+> dedecms_hiapk_com系统镜像, 会自动在fastcgi_param配置主从配置
+
+```
+        fastcgi_param DBM1_HOST 172.17.163.42;
+        fastcgi_param DBM1_PORT 8306;
+        fastcgi_param DBM1_NAME hiapkdede;
+        fastcgi_param DBM1_USER caiguangyun;
+        fastcgi_param DBM1_PWD xxxx;
+
+        fastcgi_param DBS1_HOST 172.17.163.42;
+        fastcgi_param DBS1_PORT 8306;
+        fastcgi_param DBS1_NAME hiapkdede;
+        fastcgi_param DBS1_USER caiguangyun;
+        fastcgi_param DBS1_PWD xxxx;
+```
+
+-----
+
+### 查看本地docker镜像
+> 查看镜像
+```
+[root@caiguangyuan-1 ~]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+hiapk-php53         latest              0a97d535c361        About an hour ago   295.1 MB
+centos_base         latest              d508302eca08        About an hour ago   203.1 MB
+centos              centos6             a005304e4e74        5 weeks ago         203.1 MB
+```
+
+> 启用一个容器运行项目
+``` bash
+docker run -i -t -v /data/www/dedecms_hiapk_com/:/data/www -p 8011:80 --name dedecms_hiapk_com 172.17.163.105:8500/hiapk/dedecms_hiapk_com /data/start.sh
+```
+
+
+> -d     容器将会运行在后台模式(容器运行在后台模式下，是不能使用--rm选项的)
+> -i -t  同容器进行数据交互
+> --name 给容器取名
+> -rm    当容器退出时自动删除容器 
+> -p     匹配镜像内的网络端口号
+> -v=[]  创建一个挂载绑定：[host-dir]:[container-dir]:[rw|ro]
+> -privileged 给容器扩展的权限
+
+-----
+
+> 注意退出容器采用以下快捷键
+``` bash
+	ctrl+p+q
+```
+
+> 查看正在运行的容器
+``` 
+[root@caiguangyuan-1 hiapk_php53]# docker ps
+CONTAINER ID        IMAGE                COMMAND             CREATED             STATUS              PORTS                  NAMES
+08fd1c4edd88        hiapk-php53:latest   "/bin/bash"         About an hour ago   Up About an hour    0.0.0.0:8082->80/tcp   furious_mcclintock  
+```
+
+> 进入容器
+```
+[root@caiguangyuan-1 hiapk_php53]# docker attach 08fd1c4edd88
+[root@08fd1c4edd88 install]# 
+```
+
+> 启动、停止、删除容器
+```
+[root@caiguangyuan-1 hiapk_php53] docker start 08fd1c4edd88
+[root@caiguangyuan-1 hiapk_php53] docker stop 08fd1c4edd88
+[root@caiguangyuan-1 hiapk_php53] docker rm 08fd1c4edd88
+```

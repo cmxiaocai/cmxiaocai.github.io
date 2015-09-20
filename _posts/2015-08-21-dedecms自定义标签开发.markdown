@@ -1,0 +1,151 @@
+---
+layout: post
+title:  "DEDECMS新增自定义模板标签"
+date:   2015-08-21 10:00:00
+categories: dedecms
+author: xiaocai
+github_repo_username: cmxiaocai
+github_repo : cmxiaocai
+comments: true
+---
+
+## DEDECMS新增自定义模板标签
+
+> 参考： http://www.cnblogs.com/deliver/archive/2012/12/17/2822138.html
+> add include\taglib\ztalbum.lib.php
+> add include\taglib\albuminfo.lib.php
+> 测试: 后台>模板>全局标记测试
+
+**调用方式：**
+
+```html
+{dede:albumimages aid=1441759}
+   <!-- 这里的内容会循环输出,循环次数根据图片数量决定 -->
+   图片名称:	[field:name/]  <br>
+   缩略图1:	[field:ddimg/]  <br>
+   缩略图2:	[field:smimg/]  <br>
+   摘要说明:	[field:text/]  <br>
+   排序:		[field:order/]  <br>
+   原图地址: [field:image/]  <br>
+   序号:		[field:_no/]  <br>
+   图片域名: [field:_imagehost/]  <br>
+   <hr>
+{/dede:albumimages}
+```
+
+**php：**
+
+```php
+function lib_albumimages(&$p_tag, &$p_obj){
+    global $dsql;
+
+    $ret = '';
+    $aid = intval($p_tag->GetAtt('aid'));
+    if($aid==0){
+        return '#albuminfo标签aid参数错误#';
+    }
+    
+    $albuminfo = $dsql->GetOne("SELECT * FROM `#@__addonimages` WHERE aid='{$aid}'");
+    if(empty($albuminfo)){
+        return '#albuminfo标签'.$aid.'图集不存在#';
+    }
+    $imgurls = $albuminfo['imgurls'];
+    if(empty($imgurls)){
+        return '';
+    }
+
+
+    preg_match_all("|{dede:img\sddimg='(.*?)'\ssmimg='(.*?)'\sname='(.*?)'\stext='(.*?)'\sorder='(.*?)'\swidth.*.*?}(.*?){/dede:img}|U",$imgurls,$matches, PREG_PATTERN_ORDER);
+    $images = array();
+    $count  = 0;
+    foreach ($matches[1] as $key => $value) {
+        $count++;
+        $images[$matches[5][$key]] = array(
+            'ddimg' => trim($matches[1][$key]),
+            'smimg' => trim($matches[2][$key]),
+            'name'  => trim($matches[3][$key]),
+            'text'  => trim($matches[4][$key]),
+            'order' => trim($matches[5][$key]),
+            'image' => trim($matches[6][$key]),
+            '_no'   => $count,
+            '_imagehost' => 'http://p'.rand(1,5).'.image.hiapk.com'
+        );
+    }
+
+    //解析
+    $parser = new DedeTagParse();
+    $parser->SetNameSpace('field', '[', ']');
+    $parser->LoadSource($p_tag->GetInnerText());
+    
+    //赋值
+    foreach($images as $row){
+        foreach($parser->CTags as $tag_id=>$sub_tag){
+            $tag_name = $sub_tag->GetName();
+            if(isset($row[$tag_name])){
+                $parser->Assign($tag_id, $row[$tag_name]);
+            }
+        }
+        $ret .= $parser->GetResult();
+    }
+
+    return $ret;
+}
+```
+
+--------
+
+**调用方式：**
+
+```html
+
+{dede:albuminfo aid=1441759}
+标题:[field:title/]  <br>
+短标题:[field:shorttitle/]  <br>
+标题1:[field:title1/]  <br>
+标题2:[field:title2/]  <br>
+缩略图:[field:litpic/] <br>
+发布日期:[field:senddate/] <br>
+作者: [field:writer/] <br>
+来源: [field:source/] <br>
+图集摘要:[field:description/] <br>
+{/dede:albuminfo}
+
+```
+
+**php：**
+
+```php
+function lib_albuminfo(&$p_tag, &$p_obj){
+    global $dsql;
+
+    $ret = '';
+    $aid = intval($p_tag->GetAtt('aid'));
+    if($aid==0){
+        return '#albuminfo标签aid参数错误#';
+    }
+    
+    $albuminfo = $dsql->GetOne("SELECT * FROM `#@__archives` WHERE id='{$aid}'");
+    if(empty($albuminfo)){
+        return '#albuminfo标签'.$aid.'图集不存在#';
+    }
+
+    $albuminfo['senddate'] = date('Y-m-d H:i:s', $albuminfo['senddate']);
+
+    //解析
+    $parser = new DedeTagParse();
+    $parser->SetNameSpace('field', '[', ']');
+    $parser->LoadSource($p_tag->GetInnerText());
+    
+    //赋值
+    foreach($parser->CTags as $tag_id=>$sub_tag){
+        $tag_name = $sub_tag->GetName();
+        if(isset($albuminfo[$tag_name])){
+            $parser->Assign($tag_id, $albuminfo[$tag_name]);
+        }
+    }
+    $ret .= $parser->GetResult();
+
+    return $ret;
+}
+
+```

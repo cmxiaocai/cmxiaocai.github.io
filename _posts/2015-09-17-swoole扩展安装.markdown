@@ -1,0 +1,49 @@
+---
+layout: post
+title:  "swoole扩展安装过程"
+date:   2015-09-17 10:00:00
+categories: swoole
+author: xiaocai
+github_repo_username: cmxiaocai
+github_repo : cmxiaocai
+comments: true
+---
+
+## swoole安装部署
+
+> 下载swoole-1.7.19.tgz
+> http://pecl.php.net/package/swoole
+> https://github.com/swoole/swoole-src/releases
+
+```
+cd /data/install
+wget http://pecl.php.net/get/swoole-1.7.19.tgz
+tar -zvxf swoole-1.7.19.tgz
+cd swoole-1.7.19
+```
+
+> 编译安装
+
+```
+/usr/local/php-5.4.40/bin/phpize
+./configure --with-php-config=/usr/local/php-5.4.40/bin/php-config
+make
+make install
+```
+
+> 加入php.ini
+
+```
+echo "[swoole]
+extension = swoole.so" > /usr/local/php-5.4.40/etc/ext/swoole.ini
+```
+> 重启php-fpm
+
+```
+/etc/init.d/php-fpm restart
+```
+
+> 在phpinfo()中查看
+
+![phpinfo-swoole.jpg](http://resume.xiaocai.name/images/201509/phpinfo-swoole.jpg)
+
