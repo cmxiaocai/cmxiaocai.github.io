@@ -2,7 +2,7 @@
 title: XiaoCai Blog
 description: xiaocai的博客
 email: cmxiaocai@163.com
-baseurl: /swift
+baseurl: /
 url: "http://www.xiaocai.name" # the base hostname & protocol for your site
 #favicon
 favicon: /favicon.png
