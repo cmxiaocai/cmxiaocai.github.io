@@ -1,5 +1,5 @@
 ---
-layout: category_archive.html
+layout: category_archive
 title: tags
 permalink: /tags/
 ---
