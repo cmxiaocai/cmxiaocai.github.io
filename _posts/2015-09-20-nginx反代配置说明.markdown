@@ -14,11 +14,12 @@ comments: true
 **结尾不带/**
 
 >访问 www.hiapk.dev/templets/v1/def.css 时指向 http://hit.stat.hiapk.com/templets/v1/def.css 文件
-``` nginx
+
+~~~ nginx
         location ^~ /templets/ {
                 proxy_pass http://hit.stat.hiapk.com;
         }
-```
+~~~
 
 **结尾带/**
 
