@@ -23,7 +23,7 @@ comments: true
 
 **结尾带/**
 
-> 访问 www.hiapk.dev/templets/v1/def.css 时指向 http://hit.stat.hiapk.com/def.css 文件
+>访问 www.hiapk.dev/templets/v1/def.css 时指向 http://hit.stat.hiapk.com/def.css 文件
 
 ``` nginx
         location ^~ /templets/ {
@@ -32,7 +32,7 @@ comments: true
 ```
 
 
-> 实例: 将站点templets反代至外网域名
+>实例: 将站点templets反代至外网域名
 
 ``` nginx
         location ^~ /templets/ {
@@ -41,7 +41,7 @@ comments: true
 
 ```
 
->  实例: 如果本地uploads文件不存在则使用线上地址
+>实例: 如果本地uploads文件不存在则使用线上地址
 
 ``` nginx
 		location ^~ /uploads/ {
@@ -53,8 +53,8 @@ comments: true
 ```
 
 ### 根据域名转发
-> 根据域名自动转发到相应服务器的特定端口
-> /usr/local/nginx/conf/vhost/reverse-proxy.conf
+>根据域名自动转发到相应服务器的特定端口
+>/usr/local/nginx/conf/vhost/reverse-proxy.conf
 
 ``` nginx
 server {
@@ -88,7 +88,7 @@ server {
 }
 ```
 
-> 负载均衡
+>负载均衡
 
 ``` nginx
 
