@@ -1,9 +1,9 @@
 # Site settings
-title: Swift
-description: A clean minimal Theme for Jekyll
-email: pranav@maangalabs.com
+title: XiaoCai Blog
+description: xiaocai的博客
+email: cmxiaocai@163.com
 baseurl: /swift
-url: "http://pranav.maangalabs.com" # the base hostname & protocol for your site
+url: "http://www.xiaocai.name" # the base hostname & protocol for your site
 #favicon
 favicon: /favicon.png
 
@@ -25,7 +25,7 @@ gplus_username: 101893920934936418705
 fb_username: pranav.tayberrycreative
 
 #permalink /blog/2014/11/11/this-is-a-sample-post
-permalink: /blog/:year/:month/:day/:title
+permalink: /blog/:year-:month-:day-:title
 # Build settings
 markdown: kramdown
 
@@ -37,8 +37,8 @@ disqus_show_comment_count: true
 authors:
   pranavrajs:
     display_name: Pranav Raj S
-    email: pranavrajs@gmail.com
-    fb: pranav.tayberrycreative
-    linkedin: pranavrajs
-    twitter: pranavrajs
-    github: pranavrajs
+    email: cmxiaocai@gmail.com
+    fb: 
+    linkedin: 
+    twitter: 
+    github: cmxiaocai
