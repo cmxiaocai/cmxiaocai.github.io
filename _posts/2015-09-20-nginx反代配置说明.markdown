@@ -25,7 +25,7 @@ comments: true
 
 >访问 www.hiapk.dev/templets/v1/def.css 时指向 http://hit.stat.hiapk.com/def.css 文件
 
-~~~ nginx
+~~~nginx
         location ^~ /templets/ {
                 proxy_pass http://hit.stat.hiapk.com/;
         }
@@ -34,7 +34,7 @@ comments: true
 
 >实例: 将站点templets反代至外网域名
 
-~~~ nginx
+~~~nginx
         location ^~ /templets/ {
                 proxy_pass http://hit.stat.hiapk.com;
         }
@@ -42,7 +42,7 @@ comments: true
 
 >实例: 如果本地uploads文件不存在则使用线上地址
 
-~~~ nginx
+~~~nginx
 		location ^~ /uploads/ {
                 root /data/wwwroot;
                 if ( !-e $request_filename){
