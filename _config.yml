@@ -25,11 +25,9 @@ gplus_username:
 fb_username: pranav.tayberrycreative
 
 #permalink /blog/2014/11/11/this-is-a-sample-post
-<<<<<<< HEAD
+
 permalink: /blog/:year:month:day/:title
-=======
-permalink: /blog/:year-:month-:day/:title
->>>>>>> 309d70c93088dee9068e511d816740681b6d81b9
+
 # Build settings
 markdown: kramdown
 
