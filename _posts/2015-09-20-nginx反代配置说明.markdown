@@ -12,6 +12,7 @@ comments: true
 ### proxy_pass配置说明
 
 **结尾不带/**
+
 > 访问 www.hiapk.dev/templets/v1/def.css 时指向 http://hit.stat.hiapk.com/templets/v1/def.css 文件
 
 ``` nginx
@@ -21,6 +22,7 @@ comments: true
 ```
 
 **结尾带/**
+
 > 访问 www.hiapk.dev/templets/v1/def.css 时指向 http://hit.stat.hiapk.com/def.css 文件
 
 ``` nginx
