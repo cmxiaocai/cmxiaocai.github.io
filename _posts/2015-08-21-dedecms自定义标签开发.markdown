@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "DEDECMS新增自定义模板标签"
+title:  "20150821 DEDECMS新增自定义模板标签"
 date:   2015-08-21 10:00:00
 categories: dedecms
 author: xiaocai

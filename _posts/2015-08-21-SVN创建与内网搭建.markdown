@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "部门通过SVN与docker搭建项目内网"
+title:  "20150821 部门通过SVN与docker搭建项目内网"
 date:   2015-08-21 10:00:00
 categories: svn,docker
 author: xiaocai

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "安装docker镜像仓库"
+title:  "20150821 安装docker镜像仓库"
 date:   2015-08-21 10:00:00
 categories: docker,docker-registry
 author: xiaocai

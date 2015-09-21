@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "redis服务部署"
+title:  "20150917 redis服务部署"
 date:   2015-09-17 10:00:00
 categories: redis
 author: xiaocai

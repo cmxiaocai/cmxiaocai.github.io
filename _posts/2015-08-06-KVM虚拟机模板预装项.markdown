@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "KVM虚拟机模板预装"
+title:  "20150806 KVM虚拟机模板预装"
 date:   2015-08-06 10:00:00
 categories: KVM,docker
 author: xiaocai

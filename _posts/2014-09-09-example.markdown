@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "example~"
+title:  "20140909 example~"
 date:   2015-09-09 22:37:00
 categories: example
 author: xiaocai

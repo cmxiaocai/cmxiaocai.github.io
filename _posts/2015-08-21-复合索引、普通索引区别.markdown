@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "复合索引、普通索引区别"
+title:  "20150821 复合索引、普通索引区别"
 date:   2015-08-21 10:00:00
 categories: mysql
 author: xiaocai
