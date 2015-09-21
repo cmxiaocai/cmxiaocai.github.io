@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "2015-09-21-swoole process进程阻塞与非阻塞"
-date:   2015-09-21 11:35:00
-categories: swoole
+title:  "swoole process进程阻塞与非阻塞"
+date:   2015-09-17 10:00:00
+categories: redis
 author: xiaocai
 github_repo_username: cmxiaocai
 github_repo : cmxiaocai
