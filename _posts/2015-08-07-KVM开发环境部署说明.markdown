@@ -3,6 +3,7 @@ layout: post
 title:  "KVM虚拟机开发环境部署"
 date:   2015-08-07 10:00:00
 categories: KVM,docker,samba
+tags:KVM,docker,samba
 author: xiaocai
 github_repo_username: cmxiaocai
 github_repo : cmxiaocai

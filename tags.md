@@ -2,7 +2,6 @@
 layout: page
 title: Tag
 permalink: /tags/
-icon: octicon-tag
 styles: [tagCloud.css, tags.css]
 scripts: [tagCloud.js, tags.js]
 isNavItem: true
@@ -26,11 +25,5 @@ isNavItem: true
         <li itemscope><span class="entry-date"><time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date_to_string }}</time></span> &raquo; <a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}">{{ post.title }}</a></li>
         {% endif %}{% endfor %}{% endfor %}
     </ul>
-    {% endfor %}
-</div>
-
-<div class="tagCloud">
-    {% for tag in site.tags %}
-    <a href="#{{ tag | first }}">{{ tag | first }}</a>
     {% endfor %}
 </div>
