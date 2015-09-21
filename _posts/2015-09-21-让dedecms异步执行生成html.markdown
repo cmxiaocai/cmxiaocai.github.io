@@ -16,11 +16,11 @@ comments: true
 
 *效果:*
 
-![](http://resume.xiaocai.name/images/201509/dedecms-makehtml1.jpg)
+![](http://www.xiaocai.name/uploads/201509/dedecms-makehtml1.jpg)
 
-![](http://resume.xiaocai.name/images/201509/dedecms-makehtml2.jpg)
+![](http://www.xiaocai.name/uploads/201509/dedecms-makehtml2.jpg)
 
-压缩包下载:[http://resume.xiaocai.name/images/201509/makelist_list_v2.zip](http://resume.xiaocai.name/images/201509/makelist_list_v2.zip "makelist_list_v2.zip")
+压缩包下载:[http://www.xiaocai.name/uploads/201509/makelist_list_v2.zip](http://www.xiaocai.name/uploads/201509/makelist_list_v2.zip "makelist_list_v2.zip")
 
 *后台守护进程:*
 
