@@ -1,3 +1,14 @@
+---
+layout: post
+title:  "2015-09-21-swoole进程阻塞与非阻塞"
+date:   2015-09-21 11:35:00
+categories: swoole
+tags:swoole
+author: xiaocai
+github_repo_username: cmxiaocai
+github_repo : cmxiaocai
+comments: true
+---
 
 > 有一个定时脚本的需求，要求是在同一时刻异步的执行多个任务。采用Swoole扩展满足需求，但在swoole_process使用中遇到阻塞与非阻塞的疑惑。
 
