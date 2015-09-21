@@ -22,6 +22,8 @@ tar -zvxf swoole-1.7.19.tgz
 cd swoole-1.7.19
 ~~~
 
+<!-- more -->
+
 > 编译安装
 
 ~~~bash

@@ -27,6 +27,7 @@ comments: true
 	yum install kernel-2.6.32-504.16.2.el6
 	reboot
 
+<!-- more -->
 
 # 接着安装一些基础编译环境
 	yum install -y tar wget gcc gcc-c++ libxml2-devel zlib-devel bzip2-devel 

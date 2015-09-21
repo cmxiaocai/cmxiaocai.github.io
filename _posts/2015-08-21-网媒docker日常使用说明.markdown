@@ -38,6 +38,8 @@ other_args="-g=/data/docker --insecure-registry=172.17.163.105:8500"
 	docker run -i -t -v /data/www/dedecms_hiapk_com/:/data/www -p 8011:80 --name dedecms_hiapk_com 172.17.163.105:8500/hiapk/dedecms_hiapk_com /data/start.sh
 ~~~
 
+<!-- more -->
+
 > **第五步**: 访问项目
 
 ~~~

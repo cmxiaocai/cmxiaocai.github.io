@@ -33,6 +33,8 @@ comments: true
 {/dede:albumimages}
 ~~~
 
+<!-- more -->
+
 **php：**
 
 ~~~php

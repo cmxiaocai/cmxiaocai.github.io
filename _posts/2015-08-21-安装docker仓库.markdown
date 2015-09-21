@@ -30,6 +30,8 @@ $ docker run
      registry
 ~~~
 
+<!-- more -->
+
 ## 授权访问仓库
 > 需要设置insecure-registry参数，否则无法pull/push镜像
 > vim /etc/sysconfig/docker

@@ -21,6 +21,8 @@ comments: true
 	make
 ~~~
 
+<!-- more -->
+
 > 建立redis目录
 
 ~~~bash

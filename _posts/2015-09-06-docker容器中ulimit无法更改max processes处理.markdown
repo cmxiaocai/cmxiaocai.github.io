@@ -31,6 +31,8 @@ comments: true
 worker_rlimit_nofile 51200;
 ~~~
 
+<!-- more -->
+
 > 5.修改系统ulimit出错
 ~~~bash
 [root@a47d6b8111ff logs]# ulimit -n 51200

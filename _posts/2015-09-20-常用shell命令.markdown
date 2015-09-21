@@ -21,6 +21,8 @@ grep 'zb/bd2015/' news.hiapk.com-aceess.log | wc -l
 grep 'dededynamicapi_v2.php' manager.hiapk.com-aceess.log | grep '08/Sep/2015:[0-9][0-9]:.*' | awk '{print $4}' | awk -F":" '{print $2"H"}' | uniq -c 
 ~~~
 
+<!-- more -->
+
 >查找每分钟最大请求数据
 
 ~~~bash

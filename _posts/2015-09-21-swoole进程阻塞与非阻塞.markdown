@@ -37,6 +37,8 @@ function callback_function(swoole_process $worker){
 }
 ~~~
 
+<!-- more -->
+
 >结果:两次process写入的时间不一致,可以看出是阻塞运行的。
 
 ~~~bash

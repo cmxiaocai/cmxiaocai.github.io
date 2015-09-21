@@ -26,6 +26,7 @@ comments: true
 	/dev/vdb1                /data                  ext4    defaults        0 0
 ~~~
 
+<!-- more -->
 
 ### 2.将yum源更改为163源
 > 因为centos自带的源速度太慢了,改为163源可以提高yum的速度

@@ -38,6 +38,8 @@ comments: true
 	authz-db = authz
 ~~~
 
+<!-- more -->
+
 > 创建账号密码
 
 ~~~bash

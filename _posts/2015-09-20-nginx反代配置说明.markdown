@@ -40,6 +40,8 @@ comments: true
         }
 ~~~
 
+<!-- more -->
+
 >实例: 如果本地uploads文件不存在则使用线上地址
 
 ~~~nginx
