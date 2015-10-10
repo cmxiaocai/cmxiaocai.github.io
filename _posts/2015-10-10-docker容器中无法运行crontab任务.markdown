@@ -41,7 +41,9 @@ session    required   pam_loginuid.so
 session    include    password-auth
 auth       include    password-auth
 ~~~
+
 *改为:*
+
 ~~~bash
 account    sufficient   pam_access.so
 account    include    password-auth
