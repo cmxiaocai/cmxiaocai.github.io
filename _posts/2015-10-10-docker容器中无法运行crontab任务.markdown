@@ -15,7 +15,7 @@ comments: true
 > 逐步排除最后发现是crontab安装了但却无法使用
 > vim /etc/crontab
 
-```bash
+~~~bash
 # Example of job definition:
 # .---------------- minute (0 - 59)
 # |  .------------- hour (0 - 23)
@@ -25,7 +25,7 @@ comments: true
 # |  |  |  |  |
 # *  *  *  *  * user-name command to be executed
 */1 * * * * root echo "xiaocai" >> /tmp/crontab_run.log 
-```
+~~~
 
 <!-- more -->
 
@@ -34,24 +34,24 @@ comments: true
 > vim /etc/pam.d/crond
 > 将其中的required修改为sufficient
 
-```bash
+~~~bash
 account    required   pam_access.so
 account    include    password-auth
 session    required   pam_loginuid.so
 session    include    password-auth
 auth       include    password-auth
-```
+~~~
 *改为:*
-```bash
+~~~bash
 account    sufficient   pam_access.so
 account    include    password-auth
 session    sufficient   pam_loginuid.so
 session    include    password-auth
 auth       include    password-auth
-```
+~~~
 
 *restart后发现log写入成功*
 
-```bash
+~~~bash
 service crond restart
-```
+~~~
