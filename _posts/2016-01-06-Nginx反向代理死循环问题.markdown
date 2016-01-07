@@ -1,0 +1,52 @@
+---
+layout: post
+title:  "20160106 Nginx反向代理死循环问题"
+date:   2016-01-06 10:00:00
+categories: nginx
+author: xiaocai
+github_repo_username: cmxiaocai
+github_repo : cmxiaocai
+comments: true
+---
+
+> 需求是要将news.hiapk.com指向内网cms.one.91.com/MAKE-NEWS-HIAPK/ , 在做反代测试时出现目录死循环http响应"414 Request-URI Too Large"
+
+**异常现象:**
+
+	10.79.153.11 - - [06/Jan/2016:16:58:13 +0800] "GET /MAKE-NEWS-HIAPK/MAKE-NEWS-HIAPK/MAKE-NEWS-HIAPK/MAKE-NEWS-HIAPK/MAKE-NEWS-HIAPK/MAKE-NEWS-HIAPK/MAKE-NEWS-HIAPK/meizu/HIAPK1626034.html HTTP/1.0" 009 192 "-" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36"
+
+**反代配置:**
+
+	server {
+	    listen       80;
+	    server_name  news.hiapk.com;
+	    location / {
+	        proxy_redirect off;
+	        proxy_read_timeout 300;
+	        proxy_set_header Host $host;
+	        proxy_set_header X-Real-IP $remote_addr;
+	        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	        proxy_pass http://cms.one.91.com/MAKE-NEWS-HIAPK/;
+	    }
+	    access_log /data/httplogs/news.hiapk.access.log;
+	    error_log /data/httplogs/news.hiapk.error.log;
+	}
+
+**解决方式:**
+
+> 由于news.hiapk.com和cms.one.91.com是配置在同一台服务器，需要把Host参数注释或者写死
+
+	server {
+	    listen       80;
+	    server_name  news.hiapk.com;
+	    location / {
+	        proxy_redirect off;
+	        proxy_read_timeout 300;
+	        proxy_set_header Host cms.one.91.com;
+	        proxy_set_header X-Real-IP $remote_addr;
+	        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	        proxy_pass http://cms.one.91.com/MAKE-NEWS-HIAPK/;
+	    }
+	    access_log /data/httplogs/news.hiapk.access.log;
+	    error_log /data/httplogs/news.hiapk.error.log;
+	}

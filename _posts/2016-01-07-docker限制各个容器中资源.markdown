@@ -1,0 +1,117 @@
+---
+layout: post
+title:  "20160107 docker限制各个容器中资源"
+date:   2016-01-07 10:00:00
+categories: docker
+author: xiaocai
+github_repo_username: cmxiaocai
+github_repo : cmxiaocai
+comments: true
+---
+
+
+## 为容器分配内存
+
+***-m 100m***
+> 限制容器内存(最大能够跑到100m*2) 
+> 原因是源码里memory.memsw.limit_in_bytes 值是被设置成我们指定的内存参数的两倍
+
+***-m 100m --memory-swap=100m***
+> 这样才能彻底的限制内存大小为100m
+
+***demo:***
+
+	docker run  
+	--name "TEST01"
+	-i -t -p 8101:80
+	-m 100m --memory-swap=100m
+	-v /data/wwwroot/testsite/:/data/wwwroot 172.17.163.105:8500/online/base_nginx_1.2.2_php_5.4.41
+
+## 测试方法
+
+***stress工具***
+
+> 在容器中安装stress
+
+	rpm -Uvh http://pkgs.repoforge.org/stress/stress-1.0.2-1.el7.rf.x86_64.rpm
+
+> 分别设置内存99M，100M 发现值超过100M时程序中断
+
+	[root@5da2236a4a8e /]# stress --vm 1 --vm-bytes 99.99999M --vm-hang 0
+	stress: info: [45] dispatching hogs: 0 cpu, 0 io, 1 vm, 0 hdd
+	^C
+	[root@5da2236a4a8e /]# stress --vm 1 --vm-bytes 100M --vm-hang 0
+	stress: info: [47] dispatching hogs: 0 cpu, 0 io, 1 vm, 0 hdd
+	stress: FAIL: [47] (420) <-- worker 48 got signal 9
+	stress: WARN: [47] (422) now reaping child worker processes
+	stress: FAIL: [47] (456) failed run completed in 0s
+	[root@5da2236a4a8e /]# 
+
+***docker stats***
+
+> 启动容器后在宿主机查看容器状态,通过'MEM USAGE/LIMIT'值看出容器内存大小
+
+	docker stats TEST01 TEST02
+	CONTAINER            CPU %               MEM USAGE/LIMIT      MEM %               NET I/O
+	TEST01               0.00%               99.93 MiB/100 MiB    99.93%              42.42 KiB/5.812 KiB
+	TEST02               0.00%               0.1 Mib/50 MiB       0.00%               0 B/0 B
+
+## 为容器分配cpu
+
+> http://www.tuicool.com/articles/Zf63ayq
+> --cpuset-cpus 参数绑定cup核 （避免cpu频繁切换提供效率、限制容器cpu使用率）
+
+	docker run --name "TEST_8107" -i -t --cpuset-cpus=0-4 -p 8107:80 -v /data/wwwroot/testsite/:/data/wwwroot test_images /data/start.sh
+
+	top - 20:05:52 up 3 days,  7:54,  3 users,  load average: 0.39, 0.39, 0.49
+	Tasks: 314 total,   6 running, 308 sleeping,   0 stopped,   0 zombie
+	Cpu0  :  7.6%us, 13.2%sy,  0.0%ni,  0.3%id,  0.0%wa,  0.0%hi, 78.8%si,  0.0%st
+	Cpu1  : 20.7%us, 33.3%sy,  0.0%ni, 32.7%id,  0.0%wa,  0.0%hi, 13.3%si,  0.0%st
+	Cpu2  : 22.4%us, 26.8%sy,  0.0%ni, 42.4%id,  0.7%wa,  0.0%hi,  7.8%si,  0.0%st
+	Cpu3  : 20.9%us, 26.3%sy,  0.0%ni, 43.8%id,  0.0%wa,  0.0%hi,  9.1%si,  0.0%st
+	Cpu4  : 20.9%us, 30.3%sy,  0.0%ni, 37.7%id,  0.0%wa,  0.0%hi, 11.1%si,  0.0%st
+	Cpu5  :  0.0%us,  0.0%sy,  0.0%ni, 99.7%id,  0.3%wa,  0.0%hi,  0.0%si,  0.0%st
+	Cpu6  :  0.0%us,  0.3%sy,  0.0%ni, 99.7%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+	Cpu7  :  0.0%us,  0.0%sy,  0.0%ni,100.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+	Cpu8  :  0.0%us,  0.0%sy,  0.0%ni,100.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+	Cpu9  :  0.0%us,  0.0%sy,  0.0%ni,100.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+	Cpu10 :  0.0%us,  0.0%sy,  0.0%ni,100.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+	Cpu11 :  0.0%us,  0.0%sy,  0.0%ni,100.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+	Mem:  66149792k total,  3050336k used, 63099456k free,   253228k buffers
+	Swap:  4194300k total,        0k used,  4194300k free,   921604k cached
+
+> -c  参数设置容器cpu权重（值越高的获得的cpu使用权重越高）
+
+	docker pull agileek/cpuset-test
+
+	docker run --name TEST001 -i -d -c 512 --cpuset-cpus=3 agileek/cpuset-test
+	fd774b3eabdc573e12572fe9d9f53ddce3ba9e7d0093ed114730cfd939d30758
+	docker run --name TEST002 -i -d -c 1024 --cpuset-cpus=3 agileek/cpuset-test
+	3ccabfeaaafb1f416f6a7c43700d20392af86bde9b7082a716ac59889656ba2d
+
+
+	docker top TEST001
+	UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+	root                19402               10564               0                   20:27               ?                   00:00:00            /bin/sh -c burnP6
+	root                19422               19402               54                  20:27               ?                   00:00:17            burnP6
+
+	docker top TEST002
+	UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+	root                19516               10564               0                   20:28               ?                   00:00:00            /bin/sh -c burnP6
+	root                19536               19516               66                  20:28               ?                   00:00:20            burnP6
+
+
+## 异常处理
+
+### 内存限制失败
+> 现象:设置-m参数时出现WARNING错误提示，内存限制失败但容器仍能运行
+
+	WARNING: Your kernel does not support memory limit capabilities. Limitation discarded.
+
+> 解决方法:
+
+	升级到一个可用的内核版本
+
+## 资料
+
+> http://www.tuicool.com/articles/Zf63ayq
