@@ -6,6 +6,8 @@ description:
 keywords: docker,jenkins
 ---
 
+## 问题
+
 > 在Jenkins中执行docker build报错：Cannot connect to the Docker daemon. Is the docker daemon running on this host?
 
 
@@ -31,6 +33,8 @@ Cannot connect to the Docker daemon. Is the docker daemon running on this host?
 
 Finished: SUCCESS
 ```
+
+## 解决方案
 
 **修复：**
 

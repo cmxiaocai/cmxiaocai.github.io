@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "（一）用python做android游戏自动化测试"
-categories: python,android
+categories: android
 description: 
 keywords: python,android,test,adb,opencv
 ---
@@ -10,6 +10,7 @@ keywords: python,android,test,adb,opencv
 > 当然也可以混合使用图像识别+控件定位的方式满足需求，在这里只分享用adb+opencv实现游戏自动化测试过程。
 
 ![](http://www.xiaocai.name/uploads/201702/gametest01/15185039335877.jpg)
+
 
 
 ## 一、测试原理
