@@ -1,0 +1,15 @@
+- name: Software Engineer Keywords
+  keywords:
+      - PHP
+      - Python
+      - opencv
+      - node.js
+      - javascript
+      - linux
+      - Design Patterns
+
+- name: Test Developer Keywords
+  keywords:
+      - uiautomator2
+      - adb
+      - appium
