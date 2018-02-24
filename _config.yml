@@ -84,16 +84,16 @@ disqus:
 # https://imsun.net/posts/gitment-introduction/
 gitment:
     owner: cmxiaocai
-    repo: blog-comments
+    repo: xiaocai-blog-comments
     oauth:
-        client_id: d2e1cbbd298958076462
-        client_secret: b42a4178e5fd4a7cf63189ef4b1453b05c375709
+        client_id: 53bb4d7dc2e6975d345d
+        client_secret: e0d0fcf4b268096b1a7f22d37948802769de466b
 # https://github.com/gitalk/gitalk#install
 gitalk:
     owner: cmxiaocai
-    repo: blog-comments
-    clientID: d2e1cbbd298958076462
-    clientSecret: b42a4178e5fd4a7cf63189ef4b1453b05c375709
+    repo: xiaocai-blog-comments
+    clientID: 53bb4d7dc2e6975d345d
+    clientSecret: e0d0fcf4b268096b1a7f22d37948802769de466b
 # 在使用其它评论组件时可点击显示 Disqus
 lazy_load_disqus : false
 
@@ -101,4 +101,4 @@ lazy_load_disqus : false
 #    Analytics     #
 # ---------------- #
 google:
-    analytics_id: UA-80669434-1
+    analytics_id: UA-80669434-2
