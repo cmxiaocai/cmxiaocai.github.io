@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "selenium(python)基础操作"
-categories: selenium,python
+categories: selenium
 description: 
 keywords: selenium,python
 ---

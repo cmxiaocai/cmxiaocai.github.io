@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "macos下安装和配置android-sdk"
-categories: mac,android
+categories: android
 description: 
 keywords: android-sdk
 ---

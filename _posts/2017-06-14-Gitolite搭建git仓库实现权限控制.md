@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Gitolite搭建git仓库实现权限控制"
-categories: linux,git
+categories: linux
 description: 
 keywords: linux,git
 ---

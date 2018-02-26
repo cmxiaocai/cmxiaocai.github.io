@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "macos搭建appium+android自动化测试环境"
-categories: android,test
+categories: android
 description: 
 keywords: android,test,appium
 ---

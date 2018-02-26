@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Jenkins构建Docker镜像-无法执行docker命令"
-categories: linux,Jenkins,docker
+categories: jenkins
 description: 
 keywords: docker,jenkins
 ---
