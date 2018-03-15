@@ -176,3 +176,7 @@ Total time: 58.8522 seconds
 > 在系统设置中安装plguin phing插件
 
 ![](http://www.xiaocai.name/uploads/201803/phing.png)
+
+## 更多
+
+> 参考官方examples: https://github.com/mrook/phing-examples
