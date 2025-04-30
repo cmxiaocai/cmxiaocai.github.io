@@ -2,7 +2,7 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: http://www.xiaocai.name
+url: http://www.xiaocai.show
 date_format: "ordinal"
 title: cmxiaocai.github.io
 subtitle: "xiaoCai Blog"
@@ -16,8 +16,8 @@ side_bar_repo_limit: 5
 #      Author      #
 # ---------------- #
 author: cmxiaocai
-organization: xiaocai.name
-organization_url: http://www.xiaocai.name
+organization: xiaocai.show
+organization_url: http://www.xiaocai.show
 github_username: cmxiaocai
 location: fuzhou, China
 email: cmxiaocai@163.com
